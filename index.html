@@ -184,7 +184,7 @@
         <!--页眉-->
         <div class="h1">⭐致：时光长河中渺小的我们⭐</div>
         <div class="mate" >
-            <span>我们相遇：</span>
+            <span onclick="coloregg()">我们相遇：</span>
             <span id="timer" onclick="coloregg()">2022年9月1日-如今</span>
         </div>
 
@@ -208,6 +208,11 @@
     <script>
         alert('hello! long time no see! \n 点击屏幕右上角唱片可播放音乐哦~~~')
         console.log('恭喜你发现了这个彩蛋!\n我喜欢你~')
+
+        // 彩蛋
+        function coloregg(){
+            alert('哈哈，你点开了一个彩蛋！\n很抱歉以这样一个形式向你表白，在此之前我一直很胆小，我不敢和你表白，最开始我对此总怀着自卑的心态，我知道自己有着那么多的缺点，有着那么多的不足，而你又是那么的完美，我知道我配不上你，你值得拥有更好的；后来的我又总想以后总是会有机会，开始了“等”，等到下学期？等到毕业？等到成年？\n可这一次突发的病情后我才明白，原来我们一直都在“等”，而时间是来不及“等”的。就在周六独自在学校弹完最后一次《call of silence》时，就当一曲终了的最后一个音符在延绵时，我可能无论如何也想不到，这会是我这学期在学校弹响的最后一个音符。至此我明白了意外总是如此突然的来，而我们能做的就时好好的去抓住这个世界，不要一等再等。\n好啦，最后我也要郑重的说出这一句话：\n张彦熙，我喜欢你！\n\n当然啦，这句话也不是什么负担，你也无须为此有任何的焦虑，这只是一个承诺，你要相信无论如何都有一个人在你身后，为你加油，为你分担痛苦与伤心，直到2,147,483,647')
+        }
 
         // 音乐相关功能
         const Lovebgm = document.getElementById('Lovebgm');
@@ -268,9 +273,11 @@
                     el: '#waline',
                     serverURL: 'https://to-zyx.vercel.app', 
                     placeholder: '张彦熙，在这里留下你想说的话吧...',
+                    search: false,
                     emoji: [
                         '//unpkg.com/@waline/emojis@1.1.0/weibo',
-                        '//unpkg.com/@waline/emojis@1.1.0/bilibili'
+                        '//unpkg.com/@waline/emojis@1.1.0/bilibili',
+                        'https://unpkg.com/@waline/emojis@1.4.0/qq'
                     ],
                     dark: 'auto',
                 });
