@@ -166,8 +166,11 @@
     </style>
     
     <!-- 留言 -->
-    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-    <script src="https://unpkg.com/@waline/client@v3/dist/waline.umd.js"></script>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <script src="https://unpkg.com/@waline/client@v3/dist/waline.umd.js"></script> -->
+ <!-- 兼容问题 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.umd.js"></script>
 </head>
 <body>
 
@@ -263,27 +266,54 @@
         setInterval(updateTimer, 1000);
 
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // UMD 版本下对象名为 Waline.Waline 或直接 Waline
-            const walineInstance = (typeof Waline !== 'undefined') ? (Waline.Waline || Waline) : null;
+        // document.addEventListener('DOMContentLoaded', function() {
+   
+        //     const walineInstance = (typeof Waline !== 'undefined') ? (Waline.Waline || Waline) : null;
 
-            if (walineInstance && typeof walineInstance.init === 'function') {
-                walineInstance.init({
-                    el: '#waline',
-                    serverURL: 'https://to-zyx.zeabur.app', 
-                    placeholder: '张彦熙，在这里留下你想说的话吧...',
-                    search: false,
-                    emoji: [
-                        '//unpkg.com/@waline/emojis@1.1.0/weibo',
-                        '//unpkg.com/@waline/emojis@1.1.0/bilibili',
-                        '//unpkg.com/@waline/emojis@1.4.0/qq'
-                    ],
-                    dark: 'auto',
+        //     if (walineInstance && typeof walineInstance.init === 'function') {
+        //         walineInstance.init({
+        //             el: '#waline',
+        //             serverURL: 'https://to-zyx.zeabur.app', 
+        //             placeholder: '张彦熙，在这里留下你想说的话吧...',
+        //             search: false,
+        //             emoji: [
+        //                 '//unpkg.com/@waline/emojis@1.1.0/weibo',
+        //                 '//unpkg.com/@waline/emojis@1.1.0/bilibili',
+        //                 '//unpkg.com/@waline/emojis@1.4.0/qq'
+        //             ],
+        //             dark: 'auto',
+        //         });
+        //     } else {
+        //         console.error("Waline 加载失败：脚本未定义或格式错误");
+        //     }
+        // });
+
+        // 兼容
+  // 使用 window.onload 确保苹果浏览器加载完所有资源再执行
+        window.onload = function() {
+            try {
+            // 兼容 UMD 版本的写法
+            const waline = (typeof Waline !== 'undefined') ? (Waline.Waline || Waline) : null;
+            
+            if (waline) {
+                waline.init({
+                el: '#waline',
+                serverURL: 'https://to-zyx.zeabur.app', // 确认这里有 https
+                dark: 'auto',
+                // 增加以下配置来提高跨域成功率
+                cors: true, 
+                imageUploader: false, // 暂时关闭图片上传以减小负担
+                search: false,
+                emoji: [
+                    '//unpkg.com/@waline/emojis@1.1.0/weibo',
+                    '//unpkg.com/@waline/emojis@1.1.0/bilibili'
+                ],
                 });
-            } else {
-                console.error("Waline 加载失败：脚本未定义或格式错误");
             }
-        });
+            } catch (err) {
+                console.error("Waline 初始化失败:", err);
+            }
+        };
     </script>
 </body>
 </html>
