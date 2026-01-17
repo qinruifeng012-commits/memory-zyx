@@ -206,7 +206,7 @@
 
     
 
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.umd.js" crossorigin>
         alert('hello! long time no see! \n 点击屏幕右上角唱片可播放音乐哦~~~')
         console.log('恭喜你发现了这个彩蛋!\n我喜欢你~')
 
@@ -299,6 +299,8 @@
                 el: '#waline',
                 serverURL: 'https://to-zyx.zeabur.app', // 确认这里有 https
                 dark: 'auto',
+                lang: 'zh-CN',
+                path: window.location.pathname,
                 // 增加以下配置来提高跨域成功率
                 cors: true, 
                 imageUploader: false, // 暂时关闭图片上传以减小负担
@@ -316,4 +318,5 @@
     </script>
 </body>
 </html>
+
 
