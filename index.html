@@ -164,14 +164,13 @@
             }
         }
     </style>
-
+    
+    <!-- 留言 -->
     <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
     <script src="https://unpkg.com/@waline/client@v3/dist/waline.umd.js"></script>
 </head>
 <body>
-    <!-- 留言 -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-            <script src="https://unpkg.com/@waline/client@v3/dist/waline.js"></script> -->
+
 
     <div id="overlay" class="img_overlay" onclick="closeImage()"><!--实现图片点击放大-->
         <img id="overlayImg" src="" alt="">
@@ -271,13 +270,13 @@
             if (walineInstance && typeof walineInstance.init === 'function') {
                 walineInstance.init({
                     el: '#waline',
-                    serverURL: 'https://to-zyx.vercel.app', 
+                    serverURL: 'https://to-zyx.zeabur.app', 
                     placeholder: '张彦熙，在这里留下你想说的话吧...',
                     search: false,
                     emoji: [
                         '//unpkg.com/@waline/emojis@1.1.0/weibo',
                         '//unpkg.com/@waline/emojis@1.1.0/bilibili',
-                        'https://unpkg.com/@waline/emojis@1.4.0/qq'
+                        '//unpkg.com/@waline/emojis@1.4.0/qq'
                     ],
                     dark: 'auto',
                 });
