@@ -164,13 +164,8 @@
             }
         }
     </style>
-    
-    <!-- 留言 -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-    <script src="https://unpkg.com/@waline/client@v3/dist/waline.umd.js"></script> -->
- <!-- 兼容问题 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.umd.js" crossorigin></script>
 </head>
 <body>
 
@@ -289,34 +284,33 @@
 
         // 兼容
   // 使用 window.onload 确保苹果浏览器加载完所有资源再执行
-        window.onload = function() {
-            try {
-            // 兼容 UMD 版本的写法
-            const waline = (typeof Waline !== 'undefined') ? (Waline.Waline || Waline) : null;
-            
-            if (waline) {
-                waline.init({
-                el: '#waline',
-                serverURL: 'https://to-zyx.zeabur.app', // 确认这里有 https
-                dark: 'auto',
-                lang: 'zh-CN',
-                path: window.location.pathname,
-                // 增加以下配置来提高跨域成功率
-                cors: true, 
-                imageUploader: false, // 暂时关闭图片上传以减小负担
-                search: false,
-                emoji: [
-                    '//unpkg.com/@waline/emojis@1.1.0/weibo',
-                    '//unpkg.com/@waline/emojis@1.1.0/bilibili'
-                ],
+        function initWaline() {
+            if (typeof Waline !== 'undefined') {
+                const walineInstance = Waline.Waline || Waline;
+                walineInstance.init({
+                    el: '#waline',
+                    serverURL: 'https://to-zyx.zeabur.app',
+                    dark: 'auto',
+                    placeholder: '张彦熙，在这里留下你想说的话吧...',
+                    imageUploader: false,
+                    search: false,
+                        // 解决苹果端不显示的关键配置
+                    reaction: true, 
+                    lang: 'zh-CN',
+                    emoji: [
+                        '//unpkg.com/@waline/emojis@1.1.0/weibo',
+                        '//unpkg.com/@waline/emojis@1.1.0/bilibili'
+                    ],
                 });
+            } else {
+                // 如果加载失败，500ms 后重试一次
+                setTimeout(initWaline, 500);
             }
-            } catch (err) {
-                console.error("Waline 初始化失败:", err);
-            }
-        };
+        }
+    initWaline();
     </script>
 </body>
 </html>
+
 
 
